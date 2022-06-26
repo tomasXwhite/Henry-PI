@@ -20,6 +20,7 @@ function Home(props) {
   function handleChange(e) {
     setQuery(e)
   }
+if(!props.recipes.length) return "cargando"
 
         return (
         <div>

@@ -18,7 +18,7 @@ return (
             <img id="logoHome" src={home} width="45" height="45" className="d-inline-block align-top"  alt="" />
           </span>
         </Link>
-        <Link  to='/createRecipe' >
+        <Link  to='/recipes/createRecipe' >
             <h4 className={styles.create}>Create recipe</h4>
         </Link>
           

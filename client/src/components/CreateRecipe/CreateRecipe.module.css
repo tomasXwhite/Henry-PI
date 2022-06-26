@@ -31,8 +31,7 @@ min-height: 89vh;
 
 
 
-
-form{
+.form{
     margin-left: 100px;
     width: 200px;
     max-width: 400px;
@@ -184,4 +183,4 @@ input:not(:placeholder-shown) ~ .line {
 
     color:red;
     font-size: 10px
-}
+} 

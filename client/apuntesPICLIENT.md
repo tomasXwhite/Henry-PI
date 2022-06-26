@@ -22,4 +22,9 @@ Ahora paso a los componentes.
 
 
 
-Y
+DUDA: en Cardd, no se como poner el loading como lo hacia en breaking bad, ya q renderizo otro componente dentro de mi componente
+DUDA: no se porqué me marca en consola cuando hago el get un status 304,
+DUDA: como hacer el paginado correctamente, no tengo q usar el paginado u ordenado de la api externa
+DUDA: quiero que la nav se muetre siempre pero que dentro cambie el logo de home a la searchbar, solo cuando esté en recipes, para buscar las recetas,.
+DUDA: los componentes RecipeDetail y CreateRecipe están colisionando y no se pq, porque puse el exact path, y al apretar en la nav en create recipe, me lleva a los dos componentes y me hace un get, 
+DUDA: en el form, tengo q poner el id con el nombre del elemento, asi al apretar en el input hace la transition, pero funciona con todos menos con el title y tengo el title exactamente igual a los otros.
