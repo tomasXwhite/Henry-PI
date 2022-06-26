@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST,                 //destructuring de mis variables de entorno
+  DB_USER, DB_PASSWORD, DB_HOST, APIKEY1, APIKEY2                //destructuring de mis variables de entorno
 } = process.env; 
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
@@ -37,6 +37,18 @@ const { Recipe, Diet } = sequelize.models;
 
 Recipe.belongsToMany(Diet, {through: 'Recipe_Diet'})
 Diet.belongsToMany(Recipe, {through: 'Recipe_Diet'})
+
+// async function lol() {
+//   const r = await Recipe.create({name: "tomas olivera", summary: 50.1, health: 58.0, steps: "primero segundo tercero"})
+//   console.log(r.__proto__)
+// }
+
+
+// lol()
+// console.log("run")
+// console.log(sequelize.models.diet)
+
+
 
 
 module.exports = {

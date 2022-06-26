@@ -9,23 +9,24 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    nombre: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
-    resumen: {
-      type: DataTypes.STRING(100),
+    summary: {
+      type: DataTypes.TEXT,
       allowNull: false,
     },
-    health_score: {
+    health: {
       type: DataTypes.FLOAT,
       validate: {
         min: 0,
         max: 100,
       }
     },
-    step_by_step: {
+    steps: {
       type: DataTypes.STRING,
     }
-  });
+  }, {timestamps: false});
 };
