@@ -6,7 +6,7 @@ const { conn, Recipe, Diet } = require("../db.js");
 const axios = require("axios");
 require('dotenv').config();
 const {
-  APIKEY1, APIKEY2                //destructuring de mis variables de entorno
+  APIKEY1, APIKEY2, APIKEY3, APIKEY4, APIKEY5, APIKEY6, APIKEY7, APIKEY8, APIKEY10                //destructuring de mis variables de entorno
 } = process.env;
 
 const { prueba } = require("../controllers/controllers.js");
@@ -24,7 +24,7 @@ router.get("/recipes", async (req, res) => {
 
   try {
     let result = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?number=10&addRecipeInformation=true&apiKey=${APIKEY2}`
+      `https://api.spoonacular.com/recipes/complexSearch?number=50&addRecipeInformation=true&apiKey=${APIKEY1}`
     );
     result = await result.data;
     let resultadoFinalApi = result.results; //ahora result va a ser un arr con ls obj q van a ser las recetas
@@ -66,7 +66,7 @@ router.get("/recipes/:id", async (req, res) => {
   if (id.length < 10) {
     try {
       let result = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${APIKEY2}`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${APIKEY1}`
       );
       result = await result.data;
       // const resultado = result.filter(e => e)                       //aca me falta filtrar toda la info q me da la api, para mostrar lo que me pidan, pero no se q me piden

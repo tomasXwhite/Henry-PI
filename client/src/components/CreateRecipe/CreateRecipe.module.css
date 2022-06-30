@@ -9,21 +9,13 @@
 
 
 .body{
-    /* background-color: #e5e5f7;
-    opacity: 0.8;
-    background-image:  radial-gradient(#898fff 0.8500000000000001px, transparent 0.8500000000000001px), radial-gradient(#898fff 0.8500000000000001px, #e5e5f7 0.8500000000000001px);
-    background-size: 34px 34px;
-    background-position: 0 0,17px 17px;
-    display: flex;
-    min-height: 89vh; */
-
-    background-color: #ededff;
+background-color: #ededff;
 opacity: 1;
 background-image:  radial-gradient(#747bff 0.7000000000000001px, transparent 0.7000000000000001px), radial-gradient(#747bff 0.7000000000000001px, #ededff 0.7000000000000001px);
 background-size: 28px 28px;
 background-position: 0 0,14px 14px;
 display: flex;
-min-height: 89vh;
+min-height: 91vh;
 
     
 }

@@ -1,0 +1,119 @@
+@import url('https://css.gg/css?=|smart-home-cooker');
+
+*{
+
+    margin-top: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+nav{
+    max-width: 900px;
+    margin: auto;
+    background-color: #333;
+    font-size: 20px;
+    margin-top: 0px;
+    border-radius: 4px;
+    text-decoration-color: #20a0ff;
+
+}
+
+.horizontal{
+
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+
+}
+
+.horizontal > li > a{
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    /* text-decoration: none; */
+}
+
+.horizontal > li:hover{
+    background-color: rgb(70, 0, 0);
+}
+
+.vertical{
+    position: absolute;
+    display: none;
+    list-style: none;
+    width: 140px;
+    background-color: #333;
+    font-size: 15px;
+}
+
+.horizontal li:hover .vertical{
+    display: block;
+
+}
+
+.vertical li:hover{
+
+    background-color: black;
+}
+
+.vertical li a{
+    display: block;
+    color: white;
+    padding: 15px 15px 15px 20px;
+    text-decoration: none;
+}
+
+
+.switch > .inputt {
+	display:none;
+}
+.switch > .labell {
+	display:block;
+	position:relative;
+	background:#d1dae3;
+	width:20px;
+	height:10px;
+	border-radius:30px;
+	border:2px solid #cad3dc;
+	box-shadow: 1px -1px 5px rgba(255,255,255,0.5),
+				10px 10px 10px rgba(0,0,0,0.1),
+				inset -8px -8px 15px rgba(255,255,255,0.5),
+				inset 1px 1px 1px rgba(0,0,0,0.1);
+	cursor:pointer;
+    margin-left: 80px;
+}
+.switch > .labell:before {
+	content:"";
+	position:absolute;
+	width:10px;
+	height:10px;
+	background:#fff;
+	border-radius:50%;
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+	left:0;
+	top:0;
+	transition:all 0.3s;
+}
+.switch > .inputt:checked + .labell {
+	background:#20a0ff;
+}
+.switch > .inputt:checked + .labell:before {
+	left:9px;
+}
+
+
+
+
+
+
+
+
+
+.logo{
+    width: 50px;
+    height: 50px;
+    /* background-image: url(); */
+}

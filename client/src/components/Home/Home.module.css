@@ -1,3 +1,19 @@
+
+
+.containerCards{
+
+    display: grid; 
+    grid-template-columns: 1fr 1fr 1fr; 
+    grid-template-rows: 1fr 1fr 1fr; 
+    gap: 14px 15px; 
+    grid-template-areas: 
+      ". . ."
+      ". . ."
+      ". . ."; 
+      /* margin: 10px; */
+      margin-left: 30px;
+ 
+}
 .bar{
     border: 2px solid #77827c;
     border-radius: 5px;
@@ -13,3 +29,73 @@
     text-align: center;
 
 }
+
+.danger{
+    color: rgba(0, 0, 0, 0.509);
+    background-color: rgba(255, 255, 255, 0.699);
+    border: none;
+    border-radius: 4px;
+}
+
+
+
+
+
+
+
+/* .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  } */
+  
+  /* The container <div> - needed to position the dropdown content */
+  /* .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+   */
+  /* Dropdown Content (Hidden by Default) */
+  /* .dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  } */
+  
+  /* Links inside the dropdown */
+  /* .dropdownContent .btnLink {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  } */
+  
+  /* Change color of dropdown links on hover */
+  /* .dropdownContent .btnLink:hover {background-color: #f1f1f1} */
+  
+  /* Show the dropdown menu on hover */
+  /* .dropdown:hover .dropdownContent {
+    display: block;
+  } */
+  
+  /* Change the background color of the dropdown button when the dropdown content is shown */
+  /* .dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+  } */
+
+
+
+
+
+
+
+
+/*                DROPDOWN BUTTON !!!!!!!!11              **/
+
+

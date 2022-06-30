@@ -1,0 +1,11 @@
+
+
+.back{
+        background-color: #ededff;
+        opacity: 1;
+        background-image:  radial-gradient(#644ec7 0.7000000000000001px, transparent 0.7000000000000001px), radial-gradient(#3f4396 0.7000000000000001px, #ededff 0.7000000000000001px);
+        background-size: 28px 28px;
+        background-position: 0 0,14px 14px;
+        
+            
+}
