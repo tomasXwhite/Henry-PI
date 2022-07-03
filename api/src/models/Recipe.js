@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    health: {
+    healthScore: {
       type: DataTypes.FLOAT,
       validate: {
         min: 0,

@@ -11,29 +11,30 @@ const {
 
 const { prueba } = require("../controllers/controllers.js");
 const { Op } = require("sequelize");
+const db = require("../db.js");
 const router = Router();
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/recipes", async (req, res) => {
-  const { name } = req.query;
+  const { title } = req.query;
   // if (!name) {
   //   return res.status(404).json({ error: "falta ingresar 'name' por query" });
   // }
-  console.log("estoy en el get: " + name);
+  console.log("estoy en el get: " + title);
 
   try {
     let result = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?number=50&addRecipeInformation=true&apiKey=${APIKEY1}`
+      `https://api.spoonacular.com/recipes/complexSearch?number=50&addRecipeInformation=true&apiKey=${APIKEY10}`
     );
     result = await result.data;
     let resultadoFinalApi = result.results; //ahora result va a ser un arr con ls obj q van a ser las recetas
 
-    let resultadoFinalDb = await Recipe.findAll()
+    let resultadoFinalDb = await Recipe.findAll({include: [{ model: Diet}]})
 
-    if(name) {
+    if(title) {
      resultadoFinalApi = await resultadoFinalApi.filter((recipe) =>
-      recipe.title.toLowerCase().includes(name.toLowerCase())
+      recipe.title.toLowerCase().includes(title.toLowerCase())
     );
 
     //aca lo q hago es, primero traigo las recetas d la api, me devuelve un monton de cosas q devuelve el axios al pedo q no me sirven, la respuesta está alojada en el obj data.
@@ -41,10 +42,11 @@ router.get("/recipes", async (req, res) => {
     //Entonces, si hay name, hago un filter a ese arr, dejando pasar solo las recetas cuyo titulo incluya, sino devuelvo todas,
     resultadoFinalDb = await Recipe.findAll({
       where: {
-        name: {
-          [Op.substring]: name,
+        title: {
+          [Op.substring]: title,
         },
       },
+      include: [{model: Diet}]
     });
   }
     const arr = [...resultadoFinalApi, ...resultadoFinalDb]
@@ -66,7 +68,7 @@ router.get("/recipes/:id", async (req, res) => {
   if (id.length < 10) {
     try {
       let result = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${APIKEY1}`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${APIKEY10}`
       );
       result = await result.data;
       // const resultado = result.filter(e => e)                       //aca me falta filtrar toda la info q me da la api, para mostrar lo que me pidan, pero no se q me piden
@@ -95,29 +97,31 @@ router.get("/recipes/:id", async (req, res) => {
 });
 
 router.post("/recipes", async (req, res) => {
-  const { name, summary, health, steps, diets } = req.body;
-  if (!name || !summary)
+  const { title, summary, healthScore, steps, diets } = req.body;
+  if (!title || !summary)
     return res.status(404).json({ error: "faltan datos obligatorios" });
 
   try {
     const newRecipe = await Recipe.create({
-      name,
+      title,
       summary,
-      health,
+      healthScore,
       steps,
     });
 
     // const arrOfPromisesCreations = await diets.map(d => Diet.create(d))
     // await Promise.all(arrOfPromisesCreations)
+    if(diets?.length){
+      let dietsSelected = diets.map((d) =>
+        Diet.findOrCreate({
+          where: { name: d.name },
+          defaults: d,
+        })
+      );
+      const resolvedDiets = await Promise.all(dietsSelected)
+      resolvedDiets.map(d => newRecipe.setDiets(d[0]))
 
-    let dietsSelected = diets.map((d) =>
-      Diet.findOrCreate({
-        where: { name: d.name },
-        defaults: d,
-      })
-    );
-    const resolvedDiets = await Promise.all(dietsSelected)
-    resolvedDiets.map(d => newRecipe.setDiets(d[0]))
+    }
     
     //aca como tengo q crear la receta con sus tipos de dieta asociados, creo la receta, el diets q me llega por body va a ser un arreglo con cada dieta,
     //y le hago un mapeo para seleccionarlas, y en el caso de que me mandasen una dieta que no tengo en mi base de datos (ya que en el front voy a poner para seleccionar y por si quieren

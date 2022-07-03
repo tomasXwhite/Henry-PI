@@ -1,6 +1,14 @@
-.container * {
-    margin:0;
+.maxbuttoncontainer{
+    margin-left: 560px;                      //PARA POSICIONAR EL BOTON COMPLETO
+    margin-top: 6px;
+} 
+
+
+.containerr * {
+    margin-top:0;
     padding:0;
+    position: absolute;
+    z-index: 2;
  } 
  
  /* HTML Nav Styles */
@@ -17,6 +25,7 @@
  .navv .menuitemm > .menuu {
     position: absolute;
     pointer-events:none;
+
  }
  .navv > .menuu { display:flex; }
  
@@ -32,21 +41,23 @@
  }
  .navv > .menuu > .menuitemm .menuitemm .menuu {
     transform:translateX(100%);
-    top:0; right:0;
+    top:0; right:0; 
+
  }
  /* User Styles Below Not Required */
  /* User Styles Below Not Required */
  /* User Styles Below Not Required */
  
  .navv { 
-    margin-top: 40px;
-    margin-left: 40px;
+    margin-top: 5px; //que tan pegado esta de arriba
+    margin-left: 10px;
  }
  
  .navv .aa {
-    background:#75F;
+    background:rgb(133, 104, 249);
     color:#FFF;
-    min-width:190px;
+    min-width:90px;
+
     transition: background 0.5s, color 0.5s, transform 0.5s;
     margin:0px 6px 6px 0px;
     padding:20px 40px;
@@ -79,7 +90,7 @@
     border:10px solid transparent;
     border-left: 10px solid white;
     top: 20px;
-    left:-180px;
+    left:-165px;                            //que tan a la izquierda esta la flechita apuntando a la derecha
     transition: opacity 0.6, transform 0s;
  }
  
@@ -105,3 +116,8 @@
     opacity: 1;
  }
  
+
+
+
+
+ //CHECKBOX SWITCH TOGGLE 

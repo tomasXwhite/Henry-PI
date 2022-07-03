@@ -1,4 +1,4 @@
-@import url('https://css.gg/css?=|smart-home-cooker');
+/*@import url('https://css.gg/css?=|smart-home-cooker');
 
 *{
 
@@ -33,7 +33,7 @@ nav{
     display: block;
     padding: 15px 20px;
     color: white;
-    /* text-decoration: none; */
+    text-decoration: none;
 }
 
 .horizontal > li:hover{
@@ -65,6 +65,7 @@ nav{
     padding: 15px 15px 15px 20px;
     text-decoration: none;
 }
+*/
 
 
 .switch > .inputt {
@@ -102,6 +103,7 @@ nav{
 }
 .switch > .inputt:checked + .labell:before {
 	left:9px;
+
 }
 
 
@@ -112,8 +114,7 @@ nav{
 
 
 
-.logo{
+/* .logo{
     width: 50px;
     height: 50px;
-    /* background-image: url(); */
-}
+} */

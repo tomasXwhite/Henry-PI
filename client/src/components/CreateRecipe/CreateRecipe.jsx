@@ -1,17 +1,30 @@
+import axios from 'axios';
 import React,{ useState } from 'react';
-
+import { useSelector, useDispatch } from 'react-redux';
+import {Multiselect} from 'multiselect-react-dropdown'
 import s from './CreateRecipe.module.css'
+import { getDiets, newRecipe } from '../../redux/actions/actions';
 
 
 function CreateRecipe(props) {
 
+const _diets = useSelector((state) => state.diets)     //me traigo el arreglo con dietas de mi estado global
 
+const dispatch = useDispatch()
+
+    React.useEffect(() => {         //aca hago un didmount para dietas tambien, asi si actualizo la pag tengo las dietas igual
+       dispatch(getDiets())
+    //    console.log('dietass')
+    //    console.log(props.diets)
+     }, [ ]) 
+    
 
     const [input, setInput] = useState({
         title: "",
         summary: "",
-        health: "",
+        healthScore: "",
         steps: "",
+        diets: []
 
     })
 
@@ -41,15 +54,26 @@ function CreateRecipe(props) {
 
     }
 
+    function handleDiets(e) {
+ 
+        setInput({
+            ...input,
+            diets: e.map(d => {
+                return {name: d}
+            })
+        })
+        console.log('handle', input.diets)
+
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
-        setInput({
-        title: "",
-        summary: "",
-        health: "",
-        steps: "",
-        })
+        dispatch(newRecipe(input))
+        // console.log(input)
     }
+
+const options = _diets.map((c)=>(c.name))
+
 
 
     return(
@@ -76,8 +100,8 @@ function CreateRecipe(props) {
             </div>
             <br></br>
             <div className={s.group}>
-            <input type='text' id='health' name='health' value={input.health} className={s.input} placeholder=" " onChange={(e) => handleChange(e)}/>
-            <label for='health' className={s.label}>Health Score:</label>
+            <input type='text' id='healthScore' name='healthScore' value={input.health} className={s.input} placeholder=" " onChange={(e) => handleChange(e)}/>
+            <label for='healthScore' className={s.label}>Health Score:</label>
             <span className={s.span}></span>
             {errors.health && <p className={s.danger} >{errors.title}</p> }
             </div>
@@ -87,13 +111,19 @@ function CreateRecipe(props) {
             <label for='steps' className={s.label}>Steps:</label>
             <span className={s.span}></span>
             </div>
-            <br></br>
-            {/* <div className={s.group}>
-            <input type='checkbox' id='diets' className={s.input} placeholder=" "/>
-            <label for='steps' className={s.label}>Steps:</label>
-            <span className={s.span}></span>
+            <div className={s.group}>
+            <input type="file" name="myImage" className={s.input} accept="image/*" placeholder='none'/>
             </div>
-            <br></br> */}
+            <Multiselect 
+            isObject={false}
+            options={options}
+            // value={_diets}
+            onSelect={(e)=> handleDiets(e)}
+            onRemove={(e) => handleDiets(e)}
+            />
+
+            <br></br>
+          
             <button type='submit' className={s.create} value='Create '><span>Create</span></button>
 
 

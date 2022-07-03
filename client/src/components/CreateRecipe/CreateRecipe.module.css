@@ -15,7 +15,7 @@ background-image:  radial-gradient(#747bff 0.7000000000000001px, transparent 0.7
 background-size: 28px 28px;
 background-position: 0 0,14px 14px;
 display: flex;
-min-height: 91vh;
+min-height: 100vh;
 
     
 }
@@ -24,11 +24,11 @@ min-height: 91vh;
 
 
 .form{
-    margin-left: 100px;
-    width: 200px;
+    margin-left: 23px;
+    width: 350px;
     max-width: 400px;
     background-color: #dcdcff;
-    padding: 80px 60px;
+    padding: 90px 90px;
     border-radius: 20px;
     box-shadow: 0 5px 15px -5px #898fff;
     text-align: center;
@@ -46,7 +46,8 @@ min-height: 91vh;
 
     margin-top: 3em;
     display: grid;
-    gap: 0.5em;
+    
+    gap: 0.7em;
 }
 
 .group{

@@ -53,25 +53,7 @@ $desktop: 1024px;
 	}
 }
 
-// html {
-//   box-sizing: border-box;
-//   font-size: 62.5%;
 
-//   *,
-//   *:before,
-//   *:after {
-//     box-sizing: inherit;
-//   }
-// }
-
-// body {
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	width: 100vw;
-// 	height: 100vh;
-// 	background-color: #e6e6e6;
-// }
 
 .container {
 	display: flex;
@@ -96,6 +78,7 @@ $desktop: 1024px;
 
 		.card__image {
 			transform: translateY(-10px);      //que tan alto llega la imagen cuando el hover
+		
 		}
 
 		.card__thumb {

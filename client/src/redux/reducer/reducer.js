@@ -3,6 +3,7 @@ import { mapStateToProps } from "../../components/Home/Home";
 const initialState = {
   recipes: [],
   recipeDetail: {},
+  diets: []
 };
 
 const myReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ const myReducer = (state = initialState, action) => {
         ...state,
         recipeDetail: action.payload,
       };
+    case "GET_DIETS":
+      return {
+        ...state,
+        diets: action.payload
+      }
     case "FILTER_RECIPES":
       if (action.payload === 1) {
         return {
