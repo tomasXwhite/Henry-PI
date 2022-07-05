@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Card.scss";
+import img from "../../img/plato.jpg"
 
 export default function Card(props) {
   return (
@@ -18,7 +19,11 @@ export default function Card(props) {
     <div class="container">
 	<div class="card">
 		<figure class="card__thumb">
-			<img src={props.img}  alt="Picture by Kyle Cottrell" class="card__image"/>
+      {
+        props.img ?
+        <img src={props.img}  alt="Picture by Kyle Cottrell" class="card__image"/>
+        : <img src={img} alt="img" class="card__image"/>
+      }
 			<figcaption class="card__caption">
 				<h2 class="card__title">{props.title}</h2>
 				<p class="card__snippet">{props.diets.map(d => <p>{d}</p>)}</p>

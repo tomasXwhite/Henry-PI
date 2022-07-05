@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,} from "react";
 import { connect } from "react-redux";
 import {
   getAllRecipes,
@@ -7,42 +7,40 @@ import {
   filterRecipesDiets2,
   getDiets
 } from "../../redux/actions/actions";
-import { Link, Redirect } from "react-router-dom";
-// import { useEffect} from 'react'
-// import {useDispatch, useSelector} from 'react-redux'
+import { Link,  useHistory  } from "react-router-dom";
+import {Multiselect} from 'multiselect-react-dropdown'
 import Card from "../Card/Cardd.jsx";
 import ss from "./Home.module.css";
-// import logo from "../../img/comida.png";
 import "./button.scss";
 import "./checkbox.sass";
 
 function Home(props) {
-  const [query, setQuery] = useState("");
 
+
+  const [query, setQuery] = useState("");
+  const history = useHistory()
   const [check, setCheck] = useState({
     checkedAZ: false,
     checkedZA: false,
-    checkedDiets: false,
     checkedHealth1: false,
     checkedHealth2: false,
     diets: [],
   });
-  const [checkDiets, setCheckDiets] = useState({
-    vegan: false,
-    vegetarian: false,
-    glutenFree: false,
-    dairyFree: false
-  });
+
 
   React.useEffect(() => {
     props.getDiets()
     console.log('dietass')
     console.log(props.diets)
+
   }, [ ])
 
   React.useEffect(() => {
     async function l() {
       await props.getAllRecipes(query);
+      history.replace({
+        search: ''
+      });
     }
     l();
 
@@ -55,52 +53,63 @@ function Home(props) {
   React.useEffect(() => {
     if (check.checkedAZ === true) {
       props.filterRecipesAZ(1);
-    }
+    } else
     if (check.checkedZA === true) {
       props.filterRecipesAZ(2);
-    }
+    } else
     if (check.checkedHealth1 === true) {
       props.filterRecipesAZ(3);
-    }
+    } else
     if (check.checkedHealth2 === true) {
-      props.filterRecipesAZ(4);
+      props.filterRecipesAZ(4); 
+    } else
+    if(check.diets?.length > 0 ) {
+      props.filterRecipesDiets1(check.diets) 
+      console.log("dispatch")
+    } else {
+      props.getAllRecipes();
+
     }
-    if(checkDiets.vegan === true) props.filterRecipesDiets1(["vegan"])
-    if(checkDiets.vegetarian === true) props.filterRecipesDiets1(["vegetarian"])
-    if(checkDiets.glutenFree === true) props.filterRecipesDiets1(["gluten free"])
-    if(checkDiets.dairyFree === true) props.filterRecipesDiets1(["dairy free"])
-     
-    console.log("useEffect del check");
-  }, [check, checkDiets]);
+    history.replace({
+      search: ''
+    });
+
+    console.log("useEffect del check", check.diets);
+
+    console.log(props.recipes)
+  }, [check]);
 
   function handleChangeQuery(e) {
     setQuery(e);
   }
 
   function handleChangeCheck(e) {
+
     setCheck({
+      checkedAZ: false,
+    checkedZA: false,
+    checkedHealth1: false,
+    checkedHealth2: false,
+    diets: [],
       [e.target.name]: e.target.checked,
     });
-    if (e.target.checked === false) setQuery(" ");
+    
   }
 
 
   function handleDiets(e) {
-    // if(e.target.checed===true) check.diets.push(e.target.value)
-    // else check.diets.filter(d => d === e.target.value)
-
-    // if (e.target.checed === true) {
-    //   setCheck({ ...check, diets: e.target.value });
-    // } else setCheck({...check, diets:check.diets.filter((d) => d === e.target.value)})
-    // console.log('handle diets', check)
-
-
-    setCheckDiets({
-      // ...checkDiets,
-      [e.target.name]: e.target.checked
+ console.log("e: ", e)
+    setCheck({
+        ...check,
+        diets: e.map(d => {      
+          return d
+        } )
     })
+    if(e.length === 0 ) setQuery(" ")
+    console.log('handle', check.diets)
+    // console.log("")
 
-  }
+}
 
 
 
@@ -129,7 +138,7 @@ function Home(props) {
   if (parseInt(pageN) <= 0) controlP = true; //si el numero d mi pag es 0 o menor, pongo el control de previous en true, asi si estoy en la primera pag, no puedo ir para atras y romper todo
 
 
-
+  const options = props.diets.map((c)=>(c.name))
 
   return (
     <div>
@@ -149,6 +158,7 @@ function Home(props) {
                             type="checkbox"
                             class="toggle"
                             name="checkedAZ"
+                            checked={check.checkedAZ}
                             onChange={(e) => handleChangeCheck(e)}
                           />
                         </a>{" "}
@@ -160,6 +170,7 @@ function Home(props) {
                             type="checkbox"
                             class="toggle"
                             name="checkedZA"
+                            checked={check.checkedZA}
                             onChange={(e) => handleChangeCheck(e)}
                           />
                         </a>
@@ -168,34 +179,14 @@ function Home(props) {
                         <a class="aa">Diets </a>
                         <menu class="menuu">
                           <div class="menuitemm">
-                            <a class="aa">
-                              Vegan
-                              <input
-                                type="checkbox"
-                                class="toggle"
-                                name="vegan"
-                                onChange={(e) => handleDiets(e)}
-                              />
-                            </a>
-                          </div>
-                          <div class="menuitemm">
-                            <a class="aa">
-                              Vegetarian
-                              <input type="checkbox" class="toggle" name="vegetarian"  onChange={(e) => handleDiets(e)}/>
-                            </a>
-                          </div>
-                          <div class="menuitemm">
-                            <a class="aa">
-                              Gluten free
-                              <input type="checkbox" class="toggle" name="glutenFree"  onChange={(e) => handleDiets(e)}/>
-                            </a>
-                          </div>
-                          <div class="menuitemm">
-                            <a class="aa">
-                              Dairy free
-                              <input type="checkbox" class="toggle" name="dairyFree"  onChange={(e) => handleDiets(e)}/>
-                            </a>
-                          </div>
+                        <Multiselect className="multiselect"
+            isObject={false}
+            options={options}
+            onSelect={(e)=> handleDiets(e)}
+            onRemove={(e) => handleDiets(e)}
+            />
+            </div>
+                      
                         </menu>
                       </div>
                       <div id="demo2" class="menuitemm">
@@ -208,6 +199,7 @@ function Home(props) {
                                 type="checkbox"
                                 class="toggle"
                                 name="checkedHealth1"
+                                checked={check.checkedHealth1}
                                 onChange={(e) => handleChangeCheck(e)}
                               />
                             </a>
@@ -219,6 +211,7 @@ function Home(props) {
                                 type="checkbox"
                                 class="toggle"
                                 name="checkedHealth2"
+                                checked={check.checkedHealth2}
                                 onChange={(e) => handleChangeCheck(e)}
                               />
                             </a>
@@ -239,15 +232,7 @@ function Home(props) {
             onChange={(e) => handleChangeQuery(e.target.value)} //ejecuto pasandole el valor de lo q dispara el evento, o sea lo q esta escrito
           />
 
-          {/* <div className={ss.switch}>
-            <input
-              type="checkbox"
-              id="check"
-              className={ss.inputt}
-              onChange={(e) => handleChangeCheck(e)}
-            />
-            <label for="check" className={ss.labell} />
-          </div> */}
+         
         </form>
       </selection>
 
@@ -260,9 +245,8 @@ function Home(props) {
                 title={r.title}
                 id={r.id}
                 diets={r.diets}
-                img={r.image}
-                // summary={r.summary}
-                // healthScore={r.healthScore}
+                img={ r.image ? r.image : null}
+
               />
             );
           })
@@ -270,6 +254,12 @@ function Home(props) {
           <div>Loading</div>
         )}
       </div>
+
+          {/* <Pagination 
+          controlP= {controlP}
+          controlN= {controlN}
+          /> */}
+
       <div className={ss.pagination}>
         {controlP === false ? (
           <Link to={`/recipes?page=${parseInt(pageN) - 1}`} className={ss.aa}>

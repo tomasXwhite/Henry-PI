@@ -25,7 +25,7 @@ router.get("/recipes", async (req, res) => {
 
   try {
     let result = await axios.get(
-      `https://api.spoonacular.com/recipes/complexSearch?number=50&addRecipeInformation=true&apiKey=${APIKEY10}`
+      `https://api.spoonacular.com/recipes/complexSearch?number=50&addRecipeInformation=true&apiKey=${APIKEY6}`
     );
     result = await result.data;
     let resultadoFinalApi = result.results; //ahora result va a ser un arr con ls obj q van a ser las recetas
@@ -68,7 +68,7 @@ router.get("/recipes/:id", async (req, res) => {
   if (id.length < 10) {
     try {
       let result = await axios.get(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${APIKEY10}`
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${APIKEY6}`
       );
       result = await result.data;
       // const resultado = result.filter(e => e)                       //aca me falta filtrar toda la info q me da la api, para mostrar lo que me pidan, pero no se q me piden
@@ -91,13 +91,13 @@ router.get("/recipes/:id", async (req, res) => {
             });
     } catch (err) {
       console.log(err);
-      res.status(404).json({ errorMsg: "Error en la búsqueda por id", err });
+      res.status(404).json({ errorMsg: "Error en la búsqueda por ideeeeeee", err });
     }
   }
 });
 
 router.post("/recipes", async (req, res) => {
-  const { title, summary, healthScore, steps, diets } = req.body;
+  const { title, summary, healthScore, instructions, diets } = req.body;
   if (!title || !summary)
     return res.status(404).json({ error: "faltan datos obligatorios" });
 
@@ -106,7 +106,7 @@ router.post("/recipes", async (req, res) => {
       title,
       summary,
       healthScore,
-      steps,
+      instructions,
     });
 
     // const arrOfPromisesCreations = await diets.map(d => Diet.create(d))

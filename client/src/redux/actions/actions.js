@@ -44,6 +44,7 @@ export const filterRecipesAZ = (option) => {           //si ejecuto la func con 
 
 export const filterRecipesDiets1 = (diets) => {
   return function(dispatch) {
+    console.log(diets, "diets ACTION")
     dispatch({type: "FILTER_RECIPES_DIETS_1", payload: diets})
   }      //esta es la opcion que devuelve las dietas que tengan por lo menos UNA de las dietas seleccionadas,
 }
@@ -54,17 +55,22 @@ export const filterRecipesDiets2 = (diets) => {
   }
 }
 
-export const newRecipe = async (recipe) => {
+export const newRecipe = (recipe) => {
   // return axios({
   //       method: 'post',
   //       url: 'http://localhost:3001/recipes',
   //       data : recipe
   //   })
-  await  axios.post('http://localhost:3001/recipes', { 
-    
-    ...recipe
-    
-    
- })
-.then(v => console.log("si se pudoooooooo", v), err => console.log(err))
-}
+  return async function() {
+
+    await axios.post('http://localhost:3001/recipes', { 
+      
+      ...recipe
+      
+      
+   })
+  .then(v => console.log("si se pudoooooooo", v), err => console.log(err))
+  }
+
+
+  }

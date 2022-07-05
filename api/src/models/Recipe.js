@@ -25,8 +25,9 @@ module.exports = (sequelize) => {
         max: 100,
       }
     },
-    steps: {
+    instructions: {
       type: DataTypes.STRING,
-    }
+    },
+    
   }, {timestamps: false});
 };

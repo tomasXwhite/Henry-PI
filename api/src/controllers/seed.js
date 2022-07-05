@@ -3,37 +3,40 @@ let cargarDietas = async() => {
 try{
     let arrOfDiets = [
       {
-        name: "Gluten Free"
+        name: "gluten free"
       },
       {
-        name: "Ketogenic"
+        name: "dairy free"
       },
       {
-        name: "Vegetarian"
+        name: "ketogenic"
       },
       {
-        name: "Lacto-Vegetarian"
+        name: "vegetarian"
       },
       {
-        name: "Ovo-Vegetarian"
+        name: "lacto ovo vegetarian"
+      },
+      // {
+      //   name: "Ovo-Vegetarian"
+      // },
+      {
+        name: "vegan"
       },
       {
-        name: "Vegan"
+        name: "pescetarian"
       },
       {
-        name: "Pescetarian"
+        name: "paleolithic"
       },
       {
-        name: "Paleo"
+        name: "primal"
       },
       {
-        name: "Primal"
+        name: "low fodmap"
       },
       {
-        name: "Low FODMAP"
-      },
-      {
-        name: "Whole30"
+        name: "whole 30"
       }
     ] 
     let promises = arrOfDiets.map(d => Diet.findOrCreate({

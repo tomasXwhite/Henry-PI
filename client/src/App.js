@@ -21,10 +21,12 @@ function App() {
       <Route exact path="/" component={LandingPage}/>
       <Route exact path="/recipes" component={Home}/>
       <Route exact path="/recipes/createRecipe" component={CreateRecipe}/>
-      <Route exact path="/recipes/:id([a-zA-Z0-9\-]{32}|[0-9]+)" component={RecipeDetail}/>
+      <Route exact path="/recipes/:id([a-zA-Z0-9\-]{36}|[0-9]+)" component={RecipeDetail}/>  
       <Route exact path="/about" component={About}/>
     </div>
   );
 }
 
 export default App;
+
+//([a-zA-Z0-9\-]{32}|[0-9]+)
