@@ -12,6 +12,8 @@ import NavModern from './components/NavModern/NavModern';
 import CreateRecipe from './components/CreateRecipe/CreateRecipe';
 import About from './components/About/About';
 
+import Spinner from './components/Spinner/Spinner';
+
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
       <Route exact path="/recipes/createRecipe" component={CreateRecipe}/>
       <Route exact path="/recipes/:id([a-zA-Z0-9\-]{36}|[0-9]+)" component={RecipeDetail}/>  
       <Route exact path="/about" component={About}/>
+      <Route exact path='/spinner' component={Spinner}/>
     </div>
   );
 }

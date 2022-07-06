@@ -19,6 +19,11 @@ const myReducer = (state = initialState, action) => {
         ...state,
         recipeDetail: action.payload,
       };
+    case "CLEAR_RECIPE_DETAIL":
+      return {
+        ...state,
+        recipeDetail: {}
+      }
     case "GET_DIETS":
       return {
         ...state,

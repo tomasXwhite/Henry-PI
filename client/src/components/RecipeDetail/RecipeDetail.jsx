@@ -1,5 +1,5 @@
 import React from "react";
-import { getRecipeDetail } from "../../redux/actions/actions";
+import { getRecipeDetail, clearRecipeDetail } from "../../redux/actions/actions";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -7,16 +7,31 @@ import { connect } from "react-redux";
 import s from "./recipeDetail.module.css";
 import ReactHtmlParser from "react-html-parser";
 import img from '../../img/plato.jpg'
+import Spinner from "../Spinner/Spinner";
 
 function RecipeDetail(props) {
   const { id } = useParams();
-console.log("golasdfmasdj")
+
   React.useEffect(() => {
-    props.getRecipeDetail(id);
-    console.log(props.details)
+   
+     props.getRecipeDetail(id);
+      console.log(props.details)
+    return (
+      props.clearRecipeDetail()
+    )
+    
+    
   }, [ ]);
+
+
+
+
+  // props.details ? console.log(true) : console.log(false)
+  // console.log(props.details)
   return (
+      props.details.title ?
     <div className={s.container}>
+      <div>
         <h1 className={s.title}>{props.details.title}</h1>
         {
           props.details.image ?
@@ -72,7 +87,9 @@ console.log("golasdfmasdj")
           ) : null}
         {/* </div> */}
       </div>
-    </div>
+      </div>
+      </div>
+      : <Spinner/> 
   );
 }
 
@@ -82,4 +99,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getRecipeDetail })(RecipeDetail);
+export default connect(mapStateToProps, { getRecipeDetail, clearRecipeDetail })(RecipeDetail);

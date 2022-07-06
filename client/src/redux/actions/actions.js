@@ -28,6 +28,12 @@ export const getRecipeDetail = (id) => {
     }
 }
 
+export const clearRecipeDetail = () => {
+  return function(dispatch) {
+    dispatch({type: "CLEAR_RECIPE_DETAIL"})
+  }
+}
+
 export const getDiets = () => {
   return function(dispatch) {
     return axios.get('http://localhost:3001/diets')

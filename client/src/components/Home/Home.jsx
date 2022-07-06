@@ -13,6 +13,7 @@ import Card from "../Card/Cardd.jsx";
 import ss from "./Home.module.css";
 import "./button.scss";
 import "./checkbox.sass";
+import Spinner from "../Spinner/Spinner";
 
 function Home(props) {
 
@@ -87,10 +88,11 @@ function Home(props) {
 
     setCheck({
       checkedAZ: false,
-    checkedZA: false,
-    checkedHealth1: false,
-    checkedHealth2: false,
-    diets: [],
+      checkedZA: false,
+      checkedHealth1: false,
+      checkedHealth2: false,
+      diets: [],
+
       [e.target.name]: e.target.checked,
     });
     
@@ -235,10 +237,9 @@ function Home(props) {
          
         </form>
       </selection>
-
+        {grupoDeRecetas.length ? 
       <div className={ss.containerCards}>
-        {grupoDeRecetas.length ? (
-          grupoDeRecetas?.map((r) => {
+         { grupoDeRecetas?.map((r) => {
             return (
               <Card
                 key={r.id}
@@ -250,10 +251,11 @@ function Home(props) {
               />
             );
           })
-        ) : (
-          <div>Loading</div>
+        }
+          </div>
+         : (
+          <Spinner/>
         )}
-      </div>
 
           {/* <Pagination 
           controlP= {controlP}
