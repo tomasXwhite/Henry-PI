@@ -27,3 +27,8 @@ DUDA: como hacer el paginado correctamente, no tengo q usar el paginado u ordena
 DUDA: quiero que la nav se muetre siempre pero que dentro cambie el logo de home a la searchbar, solo cuando esté en recipes, para buscar las recetas,.
 
 DUDA: MODULARIZAR CORRECTAMENTE, EL COMPONENTE HOME TENDRIA Q TNER LA PAGINACION MODULARIZADA.
+DUDA: sobre modularizar el boton x ej, y como puedo hacer mejor los filtrados para que no me haga tantos llamados a la api y que funcione bien el selector de filtrado
+
+DUDA: para el filtrado, tengo hecho lo otro pero me llama a la api al pedo, no se que tan escalable es, y puse en el handlecheck que si el checkeado es false que me haga un setQuery("") asi me dispara el useEffect q vuelve a hacer el llamado a la api, y me aparezca todo ordenado, pero el tema es q solo me lo hace una vez
+
+DUDA: yo quiero tener una propiedad q sea un arreglo, y que cuando una dieta esté checkeada, se envíe el string de la dieta al arreglo, ej 'vegan', y cuando el checkeo esté e false esa dieta se salga del arreglo. Así cuando va al useEffect del check, pregunto si el arreglo de diets.length y hago el filterDiets() pasandole como argumento la propiedad q es el arreglo de dietas.

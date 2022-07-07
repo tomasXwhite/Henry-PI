@@ -1,0 +1,26 @@
+.bar{
+    background-color: #00000036;
+      border: 2px solid #29154e;
+      border-radius: 15px;
+      padding: 5px;
+      width: 400px;
+      height: 35px;
+      margin: 8px;
+      box-sizing: border-box;
+      color: #000000;
+      text-align: center;
+      margin-top: 20px;
+      margin-left: 230px;
+      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+      
+  }
+  .bar:focus {
+    color: #29154e;
+  }
+  .center{
+      text-align: center;
+      display: flex;
+      flex-direction: row;
+  
+  }
+  

@@ -38,16 +38,6 @@ const { Recipe, Diet } = sequelize.models;
 Recipe.belongsToMany(Diet, {through: 'Recipe_Diet'})
 Diet.belongsToMany(Recipe, {through: 'Recipe_Diet'})
 
-// async function lol() {
-//   const r = await Recipe.create({name: "tomas olivera", summary: 50.1, health: 58.0, steps: "primero segundo tercero"})
-//   console.log(r.__proto__)
-// }
-
-
-// lol()
-// console.log("run")
-// console.log(sequelize.models.diet)
-
 
 
 

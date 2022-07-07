@@ -47,36 +47,8 @@
 
 }
 
-.danger{
-    color: rgba(0, 0, 0, 0.509);
-    background-color: rgba(255, 255, 255, 0.699);
-    border: none;
-    border-radius: 4px;
-}
 
 
 
 
 
-
-.pagination {
-  display: inline-block;
-}
-
-.pagination .aa {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
-}
-
-.pagination .aa.active {
-  background-color: #4CAF50;
-  color: white;
-  border: 1px solid #4CAF50;
-}
-
-.pagination .aa:hover:not(.active) {background-color: #ddd;}

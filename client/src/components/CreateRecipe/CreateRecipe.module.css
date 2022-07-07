@@ -104,6 +104,24 @@ input:not(:placeholder-shown) + .label {
     cursor: pointer;
     
 }
+
+
+
+.notCreate{
+    background-color: #bbbdfce7;
+    color: rgb(129, 129, 129);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 1.1rem;
+    font-weight: 800px;
+    padding: .9em 0;
+    border-radius: .5em;
+    border: none;
+    margin-top: 20px;
+    width: 200px;
+    transition: all 0.5s;
+
+
+}
 .span{
     position: absolute;
     bottom: 0;

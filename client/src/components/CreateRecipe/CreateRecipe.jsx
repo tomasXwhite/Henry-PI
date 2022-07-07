@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React,{ useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {Multiselect} from 'multiselect-react-dropdown'
 import s from './CreateRecipe.module.css'
 import { getDiets, newRecipe } from '../../redux/actions/actions';
 
@@ -25,10 +24,18 @@ const dispatch = useDispatch()
         healthScore: "",
         instructions: "",
         image: "",
-        diets: []
+        
 
     })
-
+    const [diets, setDiets] = useState({
+      vegan: false,
+      vegetarian: false,
+      "gluten free": false,
+      "dairy free": false,
+      ketogenic: false,
+      "whole 30": false,
+      primal: false,
+    });
     const [errors, setErrors] = useState({})
 
 
@@ -37,8 +44,11 @@ const dispatch = useDispatch()
         let error={}
         if(!input.title) error.title = "Title must not be null"
         if(input.title.length > 50) error.title = "Title must not have more than 50 characters"
+        if(!/^[ A-Za-z0-9_@./#&+-]*$/.test(input.title)) error.title= "No special characters accepted"
         if(!input.summary) error.summary = "Summary must not be null"
-        // if(input.summary )
+        if(!/^[0-9]+$/.test(input.healthScore) ) error.healthScore = "must to contain numbers"
+        if(input.healthScore < 0 ) error.healthScore = "Health cannot be negative"
+        if(input.healthScore > 100) error.healthScore = "Health cannot be +100"
         return error
     }
 
@@ -59,32 +69,49 @@ const dispatch = useDispatch()
 
     function handleDiets(e) {
  
-        setInput({
-            ...input,
-            diets: e.map(d => {
-                return {name: d}
-            })
+        setDiets({
+            ...diets,
+            [e.target.name]: e.target.checked
         })
-        console.log('handle', input.diets)
+        
+        console.log('handle', )
 
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(newRecipe(input))
+
+
+        const result = Object.entries(diets)
+      .filter(([dietName, isChecked]) => isChecked === true)
+      .map(([dietName]) => dietName);
+
+        const data = {
+            ...input,
+            diets: result.map(d => {
+              return {name: d}
+            })
+        }
+
+
+        dispatch(newRecipe(data))
+        alert("Receta creada con éxito")
+        setInput({
+            title: "",
+            summary: "",
+            healthScore: "",
+            instructions: "",
+            image: "",
+        })
     }
 
-    // function convertToBase64(e) {
-    //     const file = e.target.files[0]
-    //     const reader = new FileReader()
-    //     reader.readAsDataURL(file)
-    //     reader.onloadend = () => {
-    //       setInput({...input, image: reader.result})
-	// };
-
-    // } 
+   
     
 const options = _diets.map((c)=>(c.name))
+
+
+
+
 
 
 
@@ -112,10 +139,10 @@ const options = _diets.map((c)=>(c.name))
             </div>
             <br></br>
             <div className={s.group}>
-            <input type='text' id='healthScore' name='healthScore' value={input.health} className={s.input} placeholder=" " onChange={(e) => handleChange(e)}/>
+            <input type='number' id='healthScore' name='healthScore' value={input.healthScore} className={s.input} placeholder=" " onChange={(e) => handleChange(e)}/>
             <label for='healthScore' className={s.label}>Health Score:</label>
             <span className={s.span}></span>
-            {errors.health && <p className={s.danger} >{errors.title}</p> }
+            {errors.healthScore && <p className={s.danger} >{errors.healthScore}</p> }
             </div>
             <br></br>
             <div className={s.group}>
@@ -123,22 +150,56 @@ const options = _diets.map((c)=>(c.name))
             <label for='instructions' className={s.label}>Instructions:</label>
             <span className={s.span}></span>
             </div>
-            {/* <div className={s.group}>
-            <input type="file" name="myImage" className={s.input} accept="image/*" onChange={convertToBase64} placeholder='none'/>
-            </div> */}
-            <Multiselect 
-            isObject={false}
-            options={options}
-            // value={_diets}
-            onSelect={(e)=> handleDiets(e)}
-            onRemove={(e) => handleDiets(e)}
-            />
 
+            <menu class="menuu">
+                  <div id="demo1" class="menuitemm">
+                    <a class="aa">Filter</a>
+                    <menu class="menuu">
+                      <div class="menuitemm">
+                        <a class="aa">
+                          vegan
+                          <input
+                            type="checkbox"
+                            class="toggle"
+                            name="vegan"
+                            checked={props.vegan}
+                            onChange={(e) => handleDiets(e)}
+                          />
+                        </a>{" "}
+                      </div>
+                      <div class="menuitemm">
+                        <a class="aa">
+                          vegetarian{" "}
+                          <input
+                            type="checkbox"
+                            class="toggle"
+                            name="vegetarian"
+                            checked={props.vegetarian}
+                            onChange={(e) => handleDiets(e)}
+                          />
+                        </a>
+                      </div>
+                      </menu>
+                      </div>
+                      </menu>
+            
             <br></br>
-          
+           {
+            errors.title || errors.healthScore || errors.summary ?
+            <button  className={s.notCreate} ><span>Create</span></button>
+            :
             <button type='submit' className={s.create} value='Create '><span>Create</span></button>
 
+           }
 
+            {/* <div >
+                <select>
+                <label>dieta vegana</label>
+                <input type="checkbox" name="checkkkkk"/>
+                </select>
+
+            </div> */}
+           
             </div>
             
             

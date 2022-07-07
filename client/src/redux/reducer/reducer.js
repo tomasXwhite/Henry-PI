@@ -4,6 +4,7 @@ const initialState = {
   recipes: [],
   recipeDetail: {},
   diets: [],
+  recipes_original: []
 };
 
 const myReducer = (state = initialState, action) => {
@@ -34,7 +35,7 @@ const myReducer = (state = initialState, action) => {
         return {
           ...state,
           recipes: state.recipes
-            .sort((a, b) => {
+            .sort((a, b) => {                     
               let aa = a.title.toUpperCase();
               let bb = b.title.toUpperCase();
               if (aa < bb) return -1;
@@ -59,6 +60,7 @@ const myReducer = (state = initialState, action) => {
         };
       }
       if (action.payload === 3) {
+        console.log("REDUCER DEL HEALTHSCORE 3")
         return {
           ...state,
           recipes: state.recipes
@@ -84,19 +86,27 @@ const myReducer = (state = initialState, action) => {
               return 0;
             })
             .concat(),
-        };
+          };
       }
       break;
     case "FILTER_RECIPES_DIETS_1": {
-      let filtredArr = [];
-      action.payload.forEach((d) => {
-        state.recipes_original.forEach((r) => {
-          if (r.diets.includes(d)) {
-            if (!filtredArr.includes(r)) filtredArr.push(r);
-          }
-        });
+    // var arrOfDiets = Object.entries(action.payload)                                            //me devuelve un arreglo contenedor con arreglos por propiedad, cada arreglo contiene la key y el value, ["vegan",true]
+    // .filter(([dietName, isChecked]) => isChecked===true)                     //hago destructuring del array, ya que va iterando sobre cada array, entonces el primer valor es la prop y el segundo true o false, entonces dejo pasar los elementos q tengan su isChecked en true
+    // .map(([dietName])=> dietName)
+    if(action.payload.length<1) return {
+      ...state,
+    }
+    let filtredArr = [];
+    action.payload.forEach((d) => {
+      state.recipes_original.forEach((r) => {
+        if (r.diets.includes(d)) {
+          if (!filtredArr.includes(r)) filtredArr.push(r);
+        }
       });
-      console.log("estoy en el reducer", action.payload, filtredArr);
+    });
+  
+    console.log("EN REDUCER", filtredArr, "=----- ", action.payload)
+      // console.log("estoy en el reducer", action.payload, filtredArr);
       return {
         ...state,
         recipes: filtredArr,

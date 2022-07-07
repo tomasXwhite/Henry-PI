@@ -6,7 +6,6 @@ import LandingPage from './components/LandingPage/LandingPage.jsx';
 import Home from './components/Home/Home.jsx'
 import RecipeDetail from './components/RecipeDetail/RecipeDetail';
 
-import Nav from './components/Nav/Nav';
 import NavModern from './components/NavModern/NavModern';
 
 import CreateRecipe from './components/CreateRecipe/CreateRecipe';

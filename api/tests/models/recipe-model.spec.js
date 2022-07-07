@@ -21,7 +21,7 @@ describe('Models tests', () => {
     });
     expect(newRecipe.toJSON()).toHaveProperty('title','receta de prueba');
     expect(newRecipe.toJSON()).toHaveProperty('healthScore',99);
-    expect(newRecipe.toJSON()).toHaveProperty('steps',null);
+    expect(newRecipe.toJSON()).toHaveProperty('instructions',null);
   });
 
   it('should not create the Recipe if summary is not send', async () => {

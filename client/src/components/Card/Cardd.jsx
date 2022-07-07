@@ -26,7 +26,13 @@ export default function Card(props) {
       }
 			<figcaption class="card__caption">
 				<h2 class="card__title">{props.title}</h2>
-				<p class="card__snippet">{props.diets.map(d => <p>{d}</p>)}</p>
+				<p class="card__snippet">{props.diets.map(d => {
+          if(typeof d === "object") {
+            return <p>{d.name}</p>
+          } else return <p>{d}</p>
+          
+          
+          })}</p>
                 <Link to={`/recipes/${props.id}`}>
 				<a class="card__button">Read more</a>
                 </Link>
