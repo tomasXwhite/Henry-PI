@@ -22,7 +22,9 @@
 
 const server = require('./src/app.js');
 const { conn, Recipe, Diet } = require('./src/db.js');
-const PORT = 3001;
+require('dotenv').config();
+const { PORT } = process.env
+// const PORT = 3001;
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(async () => {
@@ -31,7 +33,7 @@ conn.sync({ force: true }).then(async () => {
   //pongo un findOrCreate, para que cuando no estén las dietas en la base las cree, pero si alguna llega a estar, cuando esté recorriendo el map cada dieta, si está no haga nada.
   //ESTO LO CAMBIE POR PONER UN SCRIPT Y EL CODIGO EN OTRO ARCHIVO, ASI CADA VEZ Q QUIERA CARGO LA DB MANUALMENTE
 
-  server.listen(PORT || 3000, () => {
+  server.listen(PORT || 5000, () => {
     console.log('listening at 3001'); // eslint-disable-line no-console
   });
 }).catch((err) => console.log("ERROR ---> ", err))
