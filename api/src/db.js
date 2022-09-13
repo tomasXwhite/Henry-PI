@@ -1,15 +1,18 @@
 require('dotenv').config();
-const { Sequelize } = require('sequelize');
+const { Sequelize, ConnectionError } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
   DB_USER, DB_PASSWORD, DB_HOST, APIKEY1, APIKEY2                //destructuring de mis variables de entorno
-} = process.env; 
+} = process.env;
 
-const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
+// const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/food`, {
+const sequelize = new Sequelize(`postgres://macbookpro:allblacks100@localhost/food`, {
+
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
-});
+})
+// sequelize.authenticate().then((r) => console.log("database on")).catch((err) => console.log("ERROR ---> ", err))
 const basename = path.basename(__filename);
 
 const modelDefiners = [];
@@ -35,8 +38,8 @@ const { Recipe, Diet } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 
-Recipe.belongsToMany(Diet, {through: 'Recipe_Diet'})
-Diet.belongsToMany(Recipe, {through: 'Recipe_Diet'})
+Recipe.belongsToMany(Diet, { through: 'Recipe_Diet' })
+Diet.belongsToMany(Recipe, { through: 'Recipe_Diet' })
 
 
 
