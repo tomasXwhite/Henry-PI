@@ -31,7 +31,7 @@ conn.sync({ force: true }).then(async () => {
   //pongo un findOrCreate, para que cuando no estén las dietas en la base las cree, pero si alguna llega a estar, cuando esté recorriendo el map cada dieta, si está no haga nada.
   //ESTO LO CAMBIE POR PONER UN SCRIPT Y EL CODIGO EN OTRO ARCHIVO, ASI CADA VEZ Q QUIERA CARGO LA DB MANUALMENTE
 
-  server.listen(PORT, () => {
+  server.listen(PORT || 3000, () => {
     console.log('listening at 3001'); // eslint-disable-line no-console
   });
 }).catch((err) => console.log("ERROR ---> ", err))
